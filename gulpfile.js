@@ -25,7 +25,7 @@ gulp.task( 'compileAdminScripts', () => {
             { 'presets': ['@babel/preset-env'] }
         ) )
         .on( 'error', (err) => console.log(err) )
-        .pipe( rename( { prefix: 'wpblc-broken-links-checker-' } ) )
+        .pipe( rename( { prefix: 'pwa-prompt-control-' } ) )
         .pipe( gulp.dest( 'assets/dist/js/admin' ) );
 } );
 
@@ -50,7 +50,7 @@ gulp.task( 'compileFrontendScripts', () => {
             { 'presets': ['@babel/preset-env'] }
         ) )
         .on( 'error', (err) => console.log(err) )
-        .pipe( rename( { prefix: 'wpblc-broken-links-checker-' } ) )
+        .pipe( rename( { prefix: 'pwa-prompt-control-' } ) )
         .pipe( gulp.dest( 'assets/dist/js/public' ) );
 } );
 
@@ -73,18 +73,18 @@ gulp.task( 'compileAdminSass', () => {
     ], { allowEmpty: true } )
         .pipe( sass() )
         .on( 'error', (err) => console.log(err) )
-        .pipe( rename( 'wpblc-broken-links-checker-admin-styles.css' ) )
+        .pipe( rename( 'pwa-prompt-control-admin-styles.css' ) )
         .pipe( gulp.dest( 'assets/dist/css/admin' ) );
 } );
 
 gulp.task( 'minifyAdminCSS', gulp.series('compileAdminSass', () => {
     return gulp.src( [
-        'assets/dist/css/admin/wpblc-broken-links-checker-admin-styles.css'
+        'assets/dist/css/admin/pwa-prompt-control-admin-styles.css'
     ], { allowEmpty: true } )
         .pipe( uglifycss( {
             uglyComments: true
         } ) )
-        .pipe( rename( 'wpblc-broken-links-checker-admin-styles.min.css' ) )
+        .pipe( rename( 'pwa-prompt-control-admin-styles.min.css' ) )
         .pipe( gulp.dest( 'assets/dist/css/admin' ) );
 }));
 
@@ -97,18 +97,18 @@ gulp.task( 'compileFrontendSass', () => {
     ], { allowEmpty: true } )
         .pipe( sass() )
         .on( 'error', (err) => console.log(err) )
-        .pipe( rename( 'wpblc-broken-links-checker-styles.css' ) )
+        .pipe( rename( 'pwa-prompt-control-styles.css' ) )
         .pipe( gulp.dest( 'assets/dist/css/public' ) );
 } );
 
 gulp.task( 'minifyFrontendCSS', gulp.series('compileFrontendSass', () => {
     return gulp.src( [
-        'assets/dist/css/public/wpblc-broken-links-checker-styles.css'
+        'assets/dist/css/public/pwa-prompt-control-styles.css'
     ], { allowEmpty: true } )
         .pipe( uglifycss( {
             uglyComments: true
         } ) )
-        .pipe( rename( 'wpblc-broken-links-checker-styles.min.css' ) )
+        .pipe( rename( 'pwa-prompt-control-styles.min.css' ) )
         .pipe( gulp.dest( 'assets/dist/css/public' ) );
 }));
 
@@ -121,11 +121,11 @@ gulp.task( 'makePOT', () => {
     )
     .pipe( wpPot(
         {
-          domain: 'wpblc-broken-links-checker',
-          package: 'WPBLC_Broken_Links_Checker'
+          domain: 'pwa-prompt-control',
+          package: 'PWA_Prompt_Control'
         }
     ) )
-    .pipe( gulp.dest( 'languages/wpblc-broken-links-checker.pot' ) );
+    .pipe( gulp.dest( 'languages/pwa-prompt-control.pot' ) );
 } );
 
 gulp.task( 'makePluginFile', () => {
@@ -148,9 +148,9 @@ gulp.task( 'makePluginFile', () => {
         '!phpcs.xml',
         '!README.md',
         '!.jshintrc',
-        '!wpblc-broken-links-checker.zip'
+        '!pwa-prompt-control.zip'
     ])
-    .pipe(zip('wpblc-broken-links-checker.zip'))
+    .pipe(zip('pwa-prompt-control.zip'))
     .pipe(gulp.dest('.'))
 } );
 

@@ -1,23 +1,23 @@
 <?php
 /**
- * The WPBLC_Broken_Links_Checker_Admin_Notices class.
+ * The PWA_Prompt_Control_Admin_Notices class.
  *
- * @package WPBLC_Broken_Links_Checker/Admin
- * @author Ilias Chelidonis.
+ * @package PWA_Prompt_Control/Admin
+ * @author Mahmoud Basiony.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Notices' ) ) :
+if ( ! class_exists( 'PWA_Prompt_Control_Admin_Notices' ) ) :
 
 	/**
 	 * Handles admin notices.
 	 *
 	 * @since 1.0.0
 	 */
-	class WPBLC_Broken_Links_Checker_Admin_Notices {
+	class PWA_Prompt_Control_Admin_Notices {
 		/**
 		 * Notices array.
 		 *
@@ -78,7 +78,7 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Notices' ) ) :
 				echo '<div class="' . esc_attr( $notice['class'] ) . '" style="position:relative;">';
 
 				if ( $notice['dismissible'] ) {
-					echo '<a href="' . esc_url( wp_nonce_url( add_query_arg( 'wpblc-broken-links-checker-hide-notice', $notice_key ), 'wpblc_broken_links_checker_hide_notices_nonce', '_wpblc_broken_links_checker_notice_nonce' ) ) . '" class="woocommerce-message-close notice-dismiss" style="position:absolute;right:1px;padding:9px;text-decoration:none;"></a>';
+					echo '<a href="' . esc_url( wp_nonce_url( add_query_arg( 'pwa-prompt-control-hide-notice', $notice_key ), 'pwapc_prompt_control_hide_notices_nonce', '_pwapc_prompt_control_notice_nonce' ) ) . '" class="woocommerce-message-close notice-dismiss" style="position:absolute;right:1px;padding:9px;text-decoration:none;"></a>';
 				}
 
 				echo '<p>' . wp_kses( $notice['message'], array( 'a' => array( 'href' => array() ) ) ) . '</p>';
@@ -95,24 +95,24 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Notices' ) ) :
 		 * @return void
 		 */
 		public function check_environment() {
-			$show_phpver_notice = get_option( 'wpblc_broken_links_checker_show_phpver_notice' );
-			$show_wpver_notice  = get_option( 'wpblc_broken_links_checker_show_wpver_notice' );
+			$show_phpver_notice = get_option( 'pwapc_prompt_control_show_phpver_notice' );
+			$show_wpver_notice  = get_option( 'pwapc_prompt_control_show_wpver_notice' );
 
 			if ( empty( $show_phpver_notice ) ) {
-				if ( version_compare( phpversion(), WPBLC_BROKEN_LINKS_CHECKER_MIN_PHP_VER, '<' ) ) {
+				if ( version_compare( phpversion(), PWA_PROMPT_CONTROL_MIN_PHP_VER, '<' ) ) {
 					/* translators: 1) int version 2) int version */
-					$message = esc_html__( 'WP Broken Links Checker - The minimum PHP version required for this plugin is %1$s. You are running %2$s.', 'wpblc-broken-links-checker' );
-					$this->add_admin_notice( 'phpver', 'error', sprintf( $message, WPBLC_BROKEN_LINKS_CHECKER_MIN_PHP_VER, phpversion() ), true );
+					$message = esc_html__( 'PWA Prompt Control for WP & AMP - The minimum PHP version required for this plugin is %1$s. You are running %2$s.', 'pwa-prompt-control' );
+					$this->add_admin_notice( 'phpver', 'error', sprintf( $message, PWA_PROMPT_CONTROL_MIN_PHP_VER, phpversion() ), true );
 				}
 			}
 
 			if ( empty( $show_wpver_notice ) ) {
 				global $wp_version;
 
-				if ( version_compare( $wp_version, WPBLC_BROKEN_LINKS_CHECKER_MIN_WP_VER, '<' ) ) {
+				if ( version_compare( $wp_version, PWA_PROMPT_CONTROL_MIN_WP_VER, '<' ) ) {
 					/* translators: 1) int version 2) int version */
-					$message = esc_html__( 'WP Broken Links Checker - The minimum WordPress version required for this plugin is %1$s. You are running %2$s.', 'wpblc-broken-links-checker' );
-					$this->add_admin_notice( 'wpver', 'notice notice-warning', sprintf( $message, WPBLC_BROKEN_LINKS_CHECKER_MIN_WP_VER, WC_VERSION ), true );
+					$message = esc_html__( 'PWA Prompt Control for WP & AMP - The minimum WordPress version required for this plugin is %1$s. You are running %2$s.', 'pwa-prompt-control' );
+					$this->add_admin_notice( 'wpver', 'notice notice-warning', sprintf( $message, PWA_PROMPT_CONTROL_MIN_WP_VER, $wp_version ), true );
 				}
 			}
 		}
@@ -125,25 +125,25 @@ if ( ! class_exists( 'WPBLC_Broken_Links_Checker_Admin_Notices' ) ) :
 		 * @return void
 		 */
 		public function hide_notices() {
-			if ( isset( $_GET['wpblc-broken-links-checker-hide-notice'] ) && isset( $_GET['_wpblc_broken_links_checker_notice_nonce'] ) ) {
-				if ( ! wp_verify_nonce( $_GET['_wpblc_broken_links_checker_notice_nonce'], 'wpblc_broken_links_checker_hide_notices_nonce' ) ) {
-					wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'wpblc-broken-links-checker' ) );
+			if ( isset( $_GET['pwa-prompt-control-hide-notice'] ) && isset( $_GET['_pwapc_prompt_control_notice_nonce'] ) ) {
+				if ( ! wp_verify_nonce( $_GET['_pwapc_prompt_control_notice_nonce'], 'pwapc_prompt_control_hide_notices_nonce' ) ) {
+					wp_die( esc_html__( 'Action failed. Please refresh the page and retry.', 'pwa-prompt-control' ) );
 				}
 
-				$notice = sanitize_text_field( $_GET['wpblc-broken-links-checker-hide-notice'] );
+				$notice = sanitize_text_field( $_GET['pwa-prompt-control-hide-notice'] );
 
 				switch ( $notice ) {
 					case 'phpver':
-						update_option( 'wpblc_broken_links_checker_show_phpver_notice', 'no' );
+						update_option( 'pwapc_prompt_control_show_phpver_notice', 'no' );
 						break;
 					case 'wpver':
-						update_option( 'wpblc_broken_links_checker_show_wpver_notice', 'no' );
+						update_option( 'pwapc_prompt_control_show_wpver_notice', 'no' );
 						break;
 				}
 			}
 		}
 	}
 
-	new WPBLC_Broken_Links_Checker_Admin_Notices();
+	new PWA_Prompt_Control_Admin_Notices();
 
 endif;

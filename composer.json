@@ -1,8 +1,8 @@
 {
-	"name": "wpblc-broken-links-checker/wpblc-broken-links-checker",
+	"name": "pwa-prompt-control/pwa-prompt-control",
 	"type": "wordpress-plugin",
-	"description": "Schedule automated scans to detect broken links on your WordPress site, view results in an intuitive table, and receive email notifications for swift resolution.",
-	"homepage": "https://github.com/mahmoudbasiony/wpblc-broken-links-checker",
+	"description": "This addon for the PWA for WP & AMP plugin controls how often the custom add to header banner is displayed.",
+	"homepage": "https://github.com/mahmoudbasiony/pwa-prompt-control",
 	"license": "GPL-3.0-or-later",
 	"require": {
 		"php": "^7.3 || ^8",

@@ -1,8 +1,8 @@
 <?php
 /**
- * Uninstall WP Broken Links Checker plugin.
+ * Uninstall PWA Prompt Control for WP & AMP plugin.
  *
- * @package WPBLC_Broken_Links_Checker
+ * @package PWA_Prompt_Control
  * @author  Reviewshake
  */
 
@@ -20,14 +20,6 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
  * and to ensure only the site owner can perform this action.
  */
 if ( defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	/*
-	 * Delete plugin options.
-	 */
-	delete_option( 'wpblc_broken_links_checker_settings' );
-	delete_option( 'wpblc_broken_links_checker_links' );
-
-	/*
-	 * Delete plugin cron jobs.
-	 */
-	wp_clear_scheduled_hook( 'wpblc_broken_links_checker_scheduled_event' );
+	// Delete the plugin options.
+	delete_option( 'pwapc_prompt_control_settings' );
 }

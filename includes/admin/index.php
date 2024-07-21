@@ -2,8 +2,8 @@
 /**
  * Silence is golden.
  *
- * @package WPBLC_Broken_Links_Checker
- * @author Ilias Chelidonis.
+ * @package PWA_Prompt_Control
+ * @author Mahmoud Basiony.
  */
 
 echo null;

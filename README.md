@@ -1,4 +1,4 @@
-# WP Broken Links Checker
+# PWA Prompt Control for WP & AMP
 
 .
 
@@ -8,14 +8,14 @@ Installation
 
 ### Requirements
 
-`wpblc-broken-links-checker` requires the following dependencies:
+`pwa-prompt-control` requires the following dependencies:
 
 - [Node.js](https://nodejs.org/)
 - [Composer](https://getcomposer.org/)
 
 ### Setup
 
-To start using all the tools that come with `wpblc-broken-links-checker`  you need to install the necessary Node.js and Composer dependencies :
+To start using all the tools that come with `pwa-prompt-control`  you need to install the necessary Node.js and Composer dependencies :
 
 ```sh
 $ composer install

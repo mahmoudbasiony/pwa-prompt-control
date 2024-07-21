@@ -1,45 +1,53 @@
-# WP Broken Links Checker
+=== PWA Prompt Control for WP & AMP ===
+Contributors: mahmoudbasiony
+Tags: PWA, Progressive Web App, prompt, banner, display control
+Requires at least: 5.4
+Tested up to: 6.6
+Requires PHP: 7.2
+Stable tag: 1.0.0
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-WP Broken Links Checker is a WordPress plugin that helps you find and fix broken links on your website.
+This addon for the PWA for WP & AMP plugin controls how often the custom add to header banner is displayed. Set the frequency and capping time to manage the banner display intervals.
 
-## Description
+== Description ==
 
-Broken links can negatively impact your website's SEO and user experience. WP Broken Links Checker scans your website for broken links and provides a report so you can easily fix them.
+PWA Prompt Control for WP & AMP is an addon plugin that enhances the functionality of the [PWA for WP & AMP](https://wordpress.org/plugins/pwa-for-wp/) plugin. This addon allows you to control how often the custom add to header banner is displayed to your users. 
 
-## Features
+With this plugin, you can:
 
-* Scans your entire website for broken links
-* Provides a report of all broken links
-* Allows you to export the report in CSV format
+* Set the frequency of how many times the banner should appear within a given time frame.
+* Set the capping time in minutes to determine the period within which the banner will be displayed according to the set frequency.
 
-## Installation
+For example, if you set the frequency to 2 and the capping time to 5 minutes, each user will see the banner two times every 5 minutes.
 
-1. Upload the `wpblc-broken-links-checker` folder to the `/wp-content/plugins/` directory
-2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Go to the WP Broken Links Checker page in the admin menu to start scanning your website for broken links
+== Installation ==
 
-## Usage
+1. Upload the `pwa-prompt-control` folder to the `/wp-content/plugins/` directory.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Navigate to 'Settings' -> 'PWA Prompt Control' to configure the frequency and capping settings.
 
-1. Go to the WP Broken Links Checker page in the admin menu
-2. Click on the 'Scan' tab
-3. Click on the 'Export Report in CSV' button to export the report in CSV format
+== Frequently Asked Questions ==
 
-## Frequently Asked Questions
+= How do I set the frequency and capping time? =
 
-**Q: Does this plugin scan all links on my website?**
+Navigate to 'Settings' -> 'PWA Prompt Control' in the WordPress admin dashboard. You can set the frequency and capping time from there.
 
-A: Yes, WP Broken Links Checker scans all links on your website, including links in posts, pages, and comments.
+= Does this plugin work independently? =
 
-**Q: How often should I scan my website for broken links?**
+No, this plugin is an addon for the [PWA for WP & AMP](https://wordpress.org/plugins/pwa-for-wp/) plugin and requires it to be installed and activated.
 
-A: It's recommended to scan your website for broken links at least once a month. However, if your website has a lot of content or if you update your website frequently, you might want to scan your website for broken links more often.
+== Changelog ==
 
-## Changelog
+= 1.0 =
+* Initial release.
 
-**1.0.0**
+== Upgrade Notice ==
 
-* Initial release
+= 1.0 =
+* Initial release.
 
-## License
+== License & Disclaimer ==
 
-This plugin is licensed under the GPL v2 or later.
+This plugin is open-source software licensed under the GPLv2 or later. This plugin is provided "as is" without warranty of any kind, express or implied. Use at your own risk.
+

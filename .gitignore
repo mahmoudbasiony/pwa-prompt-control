@@ -1,8 +1,8 @@
 /node_modules
 /vendor
 
-languages/wpblc-broken-links-checker.pot
+languages/pwa-prompt-control.pot
 package-lock.json
 composer.lock
 .DS_Store
-wpblc-broken-links-checker.zip
+pwa-prompt-control.zip
