@@ -17,7 +17,7 @@ if ( ! class_exists( 'PWA_Prompt_Control_Assets' ) ) :
 	 *
 	 * Handles front-end styles and scripts.
 	 *
-	 * @since   1.0.0
+	 * @since 1.0.0
 	 */
 	class PWA_Prompt_Control_Assets {
 		/**
@@ -28,7 +28,9 @@ if ( ! class_exists( 'PWA_Prompt_Control_Assets' ) ) :
 		 * @return void
 		 */
 		public function __construct() {
-			add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ), 20 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ), 99999 );
+			add_action( 'wp_enqueue_scripts', array( $this, 'styles' ), 20 );
+
 		}
 
 		/**
@@ -43,7 +45,7 @@ if ( ! class_exists( 'PWA_Prompt_Control_Assets' ) ) :
 			wp_enqueue_script(
 				'pwapc_prompt_control_scripts',
 				PWA_PROMPT_CONTROL_ROOT_URL . 'assets/dist/js/public/pwa-prompt-control-main.min.js',
-				array( 'jquery', 'pwa-main-script' ),
+				array(),
 				PWA_PROMPT_CONTROL_PLUGIN_VERSION,
 				true
 			);
@@ -71,6 +73,18 @@ if ( ! class_exists( 'PWA_Prompt_Control_Assets' ) ) :
 					'enable_banner_for_desktop' => (bool) $enable_banner_for_desktop,
 				)
 			);
+		}
+
+		/**
+		 * Enqueue frontend styles.
+		 *
+		 * @since 1.0.0
+		 */
+		public function styles() {
+			/*
+			 * Global styles.
+			 */
+			wp_enqueue_style( 'pwapc_prompt_control_styles', PWA_PROMPT_CONTROL_ROOT_URL . 'assets/dist/css/public/pwa-prompt-control-styles.min.css', array(), PWA_PROMPT_CONTROL_PLUGIN_VERSION, 'all' );
 		}
 	}
 

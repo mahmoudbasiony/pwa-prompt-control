@@ -1,3 +1,4 @@
+
 /* jshint esversion: 6 */
 
 /**
@@ -6,11 +7,7 @@
  * Scripts to run on the frontend.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
-	localStorage.removeItem('showCount');
-	localStorage.removeItem('lastShowTime');
-	localStorage.removeItem('nextShowTime');
-
+window.addEventListener('load', () => {
 	const banner = document.getElementById('pwaforwp-add-to-home-click');
 	const customAddToHome = Boolean(pwapc_prompt_control_params.custom_add_to_home_banner);
 	const enableForDesktop = Boolean(pwapc_prompt_control_params.enable_banner_for_desktop);
@@ -19,46 +16,40 @@ document.addEventListener('DOMContentLoaded', () => {
 	const frequency = parseInt(pwapc_prompt_control_params.frequency, 10);
 	const capping = parseInt(pwapc_prompt_control_params.capping, 10) * 60 * 1000;
 	const interval = capping / frequency;
-
+	const nowInitial = Date.now();
 	let appInstalled = false;
 	let checkInterval;
-	let showCount = parseInt(localStorage.getItem('showCount')) || 0;
-	let lastShowTime = parseInt(localStorage.getItem('lastShowTime')) || Date.now();
-	let nextShowTime = parseInt(localStorage.getItem('nextShowTime')) || Date.now();
 
 	/**
 	 * Show banner.
 	 */
 	function showBanner() {
-		banner.style.display = 'block';
+		banner.style.setProperty('display', 'block');
 		setTimeout(() => {
-			banner.style.display = 'none';
+			banner.style.setProperty('display', 'none');
 		}, 10000); // Show banner for 10 seconds.
-
-		showCount++;
-		localStorage.setItem('showCount', showCount);
-		nextShowTime += interval; // Schedule the next show time.
-		localStorage.setItem('nextShowTime', nextShowTime);
 	}
 
 	/**
 	 * Check banner conditions.
 	 */
 	function checkBannerConditions() {
-		const now = Date.now();
+		let showCount = parseInt(localStorage.getItem('pwapcShowCount')) || 0;
+		let nextShowTimeValue = localStorage.getItem('pwapcNextShowTime');
+		let nextShowTime = nextShowTimeValue ? parseInt(nextShowTimeValue) : parseInt(nowInitial + interval);
+		let now = Date.now();
 
-		if (now - lastShowTime > capping) {
-			showCount = 0;
-			lastShowTime = now;
-			nextShowTime = now; // Reset next show time to the current time
-			localStorage.setItem('showCount', showCount);
-			localStorage.setItem('lastShowTime', lastShowTime);
-			localStorage.setItem('nextShowTime', nextShowTime);
-		}
+		if (showCount === 0 || now >= nextShowTime) {
+			console.log('Show banner');
 
-		console.log(appInstalled);
-		if (showCount < frequency && now >= nextShowTime) {
+			// Show banner.
 			showBanner();
+
+			// Update show count.
+			showCount++;
+			localStorage.setItem('pwapcShowCount', showCount);
+			localStorage.setItem('pwapcNextShowTime', parseInt(now + interval));
+			localStorage.setItem('pwapcLastShowTime', now);
 		}
 	}
 
@@ -66,25 +57,33 @@ document.addEventListener('DOMContentLoaded', () => {
 	if ("serviceWorker" in navigator) {
 
 		let deferredPrompt;
-		window.addEventListener('beforeinstallprompt', function(e) {
+
+		window.addEventListener('beforeinstallprompt', function (e) {
 			e.preventDefault();
 			deferredPrompt = e;
 
-			if (enabled && !appInstalled && customAddToHome) {
-				if (!enableForDesktop && !isMobile) {
-					return;
-				}
+			if (deferredPrompt != null || deferredPrompt != undefined) {
+				if (enabled && !appInstalled && customAddToHome) {
+					if (!enableForDesktop && !isMobile) {
+						return;
+					}
 
-				checkInterval = setInterval(checkBannerConditions, 1000);
+					banner.style.setProperty('display', 'none');
+		
+					// // Call the function immediately
+					checkBannerConditions();
+			
+					// Check banner conditions every second.
+					checkInterval = setInterval(checkBannerConditions, 1000);
+				}
 			}
 		});
 
-		window.addEventListener('appinstalled', function(evt) {
+		window.addEventListener('appinstalled', function (evt) {
 			appInstalled = true;
 			console.log(appInstalled);
-			banner.style.display = 'none';
+			banner.style.setProperty('display', 'none');
 			clearInterval(checkInterval);
-
 		});
 	}
 });

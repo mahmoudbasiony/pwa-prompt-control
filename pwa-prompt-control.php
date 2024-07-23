@@ -3,7 +3,7 @@
  * Plugin Name: PWA Prompt Control for WP & AMP
  * Plugin URI:
  * Description: This addon for the PWA for WP & AMP plugin controls how often the custom add to header banner is displayed.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Mahmoud Basiony
  * Author URI:
  * Requires at least: 5.4
@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Globals constants.
  */
 define( 'PWA_PROMPT_CONTROL_PLUGIN_NAME', 'PWA Prompt Control for WP & AMP' );
-define( 'PWA_PROMPT_CONTROL_PLUGIN_VERSION', '1.0.0' );
+define( 'PWA_PROMPT_CONTROL_PLUGIN_VERSION', '1.0.1' );
 define( 'PWA_PROMPT_CONTROL_MIN_PHP_VER', '7.3' );
 define( 'PWA_PROMPT_CONTROL_MIN_WP_VER', '5.4' );
 define( 'PWA_PROMPT_CONTROL_ROOT_PATH', __DIR__ );
@@ -79,7 +79,7 @@ if ( ! class_exists( 'PWA_Prompt_Control' ) ) :
 		 *
 		 * @var string
 		 */
-		public $version = '1.0.0';
+		public $version = '1.0.1';
 
 		/**
 		 * The singelton instance of PWA_Prompt_Control.
